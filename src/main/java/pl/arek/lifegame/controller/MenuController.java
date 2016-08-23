@@ -3,10 +3,16 @@ package pl.arek.lifegame.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pl.arek.lifegame.view.ButtonPanel;
 
 @Service
 public class MenuController {
+	
+	@Autowired
+	private ButtonPanel buttonPanel;
 	
 	public ActionListener newStartListener(){
 		return new StartListener();
@@ -23,12 +29,15 @@ public class MenuController {
 	private class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Start working");
+            buttonPanel.enableOrDisablePause(true);
+            buttonPanel.enableOrDisableStart(false);
         }
     }
 	
 	private class PauseListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Pause working");
+        	buttonPanel.enableOrDisablePause(false);
+            buttonPanel.enableOrDisableStart(true);
         }
     }
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import pl.arek.lifegame.controller.BoardController;
 import pl.arek.lifegame.model.util.BoardSize;
+import pl.arek.lifegame.model.util.Position;
 
 @Component
 public class BoardPanel extends JPanel {
@@ -29,10 +30,13 @@ public class BoardPanel extends JPanel {
 				JButton button = new JButton(i + " " + j);
 				button.setPreferredSize(new java.awt.Dimension(13, 8));
 				button.setBackground(View.EMPTY_COLOR);
-				button.addActionListener(boardController.newMakeLifeListener());
+				button.addActionListener(boardController.newMakeLifeListener(new Position(i,j)));
 				buttons[i][j] = button;
 				this.add(button);
 			}
 		}
+	}
+	public void changeColor(Position pos){
+		buttons[pos.getRow()][pos.getColumn()].setBackground(View.FILLED_COLOR);
 	}
 }

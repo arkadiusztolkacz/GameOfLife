@@ -15,10 +15,11 @@ public class Cell {
         return alive;
     }
 
-    public void setAlive(boolean alive) {
+    void setAlive(boolean alive) {
         this.alive = alive;
     }
-/*
+    
+ /*
     boolean changeState(int neighboursCount) {
         if (isAlive()) {
             return changeAliveState(neighboursCount);

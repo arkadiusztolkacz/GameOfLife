@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.arek.lifegame.model.util.BoardSize;
+import pl.arek.lifegame.model.util.Position;
 
 @Service
 public class Board {
@@ -35,6 +36,11 @@ public class Board {
 		}
 	}
 	
+	public void setCell(Position pos){
+		cells[pos.getRow()][pos.getColumn()].setAlive(true);
+		System.out.println(getState());
+	}
+	
 	public String getState()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -46,6 +52,8 @@ public class Board {
 		}
 		return sb.toString();
 	}
+	
+	
 	/*
 	public Cell getCell(int x, int y) {
 		if (inBounds(x, y)) {
