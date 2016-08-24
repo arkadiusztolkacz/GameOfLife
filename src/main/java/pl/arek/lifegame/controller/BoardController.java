@@ -35,7 +35,6 @@ public class BoardController {
 			board.setCell(position);
 			//boardPanel.changeColor(position);
 			boardPanel.setButtonBackground(position);
-			
 		}
 	}
 }

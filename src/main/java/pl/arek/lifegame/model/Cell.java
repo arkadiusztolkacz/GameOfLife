@@ -7,9 +7,9 @@ public class Cell {
         this.setAlive(alive);
     }
 
-//    Cell(Cell cell) {
-//        this(cell.isAlive());
-//    }
+    Cell(Cell cell) {
+        this(cell.isAlive());
+    }
 
     boolean isAlive() {
         return alive;
@@ -19,7 +19,7 @@ public class Cell {
         this.alive = alive;
     }
     
- /*
+ 
     boolean changeState(int neighboursCount) {
         if (isAlive()) {
             return changeAliveState(neighboursCount);
@@ -42,5 +42,5 @@ public class Cell {
         }
         return false;
     }
-    */
+    
 }

@@ -1,6 +1,5 @@
 package pl.arek.lifegame.model;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +16,13 @@ public class Board {
 	private Cell[][] cells;
 	private final int columns;
 	private final int rows;
-	private final List<Dimension> changedFields;
+	private final List<Position> aliveFields;
 
 	@Autowired
 	Board(BoardSize boardSize) {
 		this.columns = boardSize.getColumns();
 		this.rows = boardSize.getRows();
-		this.changedFields = new ArrayList<>();
+		this.aliveFields = new ArrayList<>();
 	}
 
 	@PostConstruct
@@ -37,18 +36,19 @@ public class Board {
 		}
 	}
 
-	public void setCell(Position pos) {
-		Cell cell = cells[pos.getRow()][pos.getColumn()];
+	public void setCell(Position position) {
+		Cell cell = cells[position.getRow()][position.getColumn()];
 		if (cell.isAlive()) {
 			cell.setAlive(false);
+			aliveFields.remove(position);
 		} else {
 			cell.setAlive(true);
+			aliveFields.add(position);
 		}
 		System.out.println(getState());
 	}
-	
-	public boolean getCell(Position position)
-	{
+
+	public boolean getCell(Position position) {
 		return cells[position.getRow()][position.getColumn()].isAlive();
 	}
 
@@ -70,34 +70,82 @@ public class Board {
 	 * 
 	 * private boolean inBounds(int x, int y) { return x >= 0 && y >= 0 && x <
 	 * width && y < height; }
-	 * 
-	 * public void nextCycle() { Cell[][] newBoard = copyBoard();
-	 * 
-	 * for (int i = 0; i < width; i++) { for (int j = 0; j < height; j++) { int
-	 * neighboursCount = countAliveNeighbours(i, j); boolean hasChanged =
-	 * newBoard[i][j].changeState(neighboursCount); if (hasChanged) { Dimension
-	 * d = new Dimension(i, j); if (changedFields.contains(d)) {
-	 * changedFields.remove(new Dimension(i, j)); } else { changedFields.add(new
-	 * Dimension(i, j)); } } } } cells = newBoard; }
-	 * 
-	 * public int countAliveNeighbours(int i, int j) { int startX = Math.max(i -
-	 * 1, 0); int startY = Math.max(j - 1, 0); int endX = Math.min(i + 1, width
-	 * - 1); int endY = Math.min(j + 1, height - 1);
-	 * 
-	 * int aliveNeighbours = 0; for (int x = startX; x <= endX; x++) { for (int
-	 * y = startY; y <= endY; y++) { if (cells[x][y].isAlive()) {
-	 * aliveNeighbours++; } } } aliveNeighbours--;
-	 * 
-	 * return aliveNeighbours; }
-	 * 
-	 * public Cell[][] copyBoard() { Cell[][] newBoard = new
-	 * Cell[width][height]; for (int i = 0; i < width; i++) { for (int j = 0; j
-	 * < height; j++) { newBoard[i][j] = new Cell(cells[i][j]); } } return
-	 * newBoard; }
-	 * 
-	 * public void removeField(int x, int y) { Dimension d = new Dimension(x,
-	 * y); changedFields.remove(d); }
-	 * 
-	 * public List<Dimension> getFields() { return changedFields; }
 	 */
+	public void nextCycle() {
+		Cell[][] newBoard = copyBoard();
+		
+		for (int row = 0; row < rows; row++) {
+			for (int column = 0; column < columns; column++) {
+				int neighboursCount = countAliveNeighbours(row, column);
+				
+				boolean hasChanged = newBoard[row][column].changeState(neighboursCount);
+				
+//				System.out.println("row: " + row + " column: " + column + " neighbours: " + neighboursCount
+//						+ " hasChanged: " + hasChanged);
+				
+				/*if (hasChanged) {
+					//Dimension d = new Dimension(i, j);
+					Position p = new Position(row, column);
+					if (aliveFields.contains(p)) {
+						aliveFields.remove(p);
+						
+						System.out.println("Remove position " + row + " " + column);
+						
+					} else {
+						aliveFields.add(p);
+						
+						System.out.println("Add position " + row + " " + column);
+						
+					}
+				}*/
+			}
+		}
+		cells = newBoard;
+	}
+
+	private int countAliveNeighbours(int i, int j) {
+		int startX = Math.max(i - 1, 0);
+		int startY = Math.max(j - 1, 0);
+		int endX = Math.min(i + 1, rows - 1);
+		int endY = Math.min(j + 1, columns - 1);
+		
+		
+		//System.out.println("startX: " + startX + " endX: " + endX + " startY: " + startY + " endY: " + endY);
+		
+		int aliveNeighbours = 0;
+		for (int x = startX; x <= endX; x++) {
+			for (int y = startY; y <= endY; y++) {
+				
+				//System.out.println("x: " + x + " y: " + y);
+				
+				if (cells[x][y].isAlive()) {
+					aliveNeighbours++;
+				}
+			}
+		}
+		if(cells[i][j].isAlive() && aliveNeighbours > 0){
+			aliveNeighbours--;
+		}
+		
+
+		return aliveNeighbours;
+	}
+
+	private Cell[][] copyBoard() {
+		Cell[][] newBoard = new Cell[rows][columns];
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				newBoard[i][j] = new Cell(cells[i][j]);
+			}
+		}
+		return newBoard;
+	}
+
+//	public void removeField(int x, int y) {
+//		Dimension d = new Dimension(x, y);
+//		changedFields.remove(d);
+//	}
+	
+	  public List<Position> getAliveFields() { return aliveFields; }
+	 
 }

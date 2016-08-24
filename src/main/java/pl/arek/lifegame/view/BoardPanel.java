@@ -1,6 +1,8 @@
 package pl.arek.lifegame.view;
 
 import java.awt.GridLayout;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,7 +17,8 @@ import pl.arek.lifegame.model.util.Position;
 
 @Component
 public class BoardPanel extends JPanel {
-	
+	@Autowired
+	private BoardSize boardSize;
 	@Autowired
 	private Board board;
 	
@@ -25,10 +28,11 @@ public class BoardPanel extends JPanel {
 	BoardPanel(BoardSize boardSize, BoardController boardController) {
 		this.buttons = new JButton[boardSize.getRows()][boardSize.getColumns()];
 		setLayout(new GridLayout(boardSize.getRows(), boardSize.getColumns()));
-		addButtons(boardSize, boardController);
+		this.boardSize = boardSize;
+		addButtons(boardController);
 	}
 
-	private void addButtons(BoardSize boardSize, BoardController boardController) {
+	private void addButtons(BoardController boardController) {
 		for (int i = 0; i < boardSize.getRows(); i++) {
 			for (int j = 0; j < boardSize.getColumns(); j++) {
 				JButton button = new JButton(i + " " + j);
@@ -41,6 +45,31 @@ public class BoardPanel extends JPanel {
 		}
 	}
 	
+	public void nextCycle()
+	{
+//		resetFields();
+//		List<Position> aliveFields = board.getAliveFields();
+//		for(Position p: aliveFields){
+//			buttons[p.getRow()][p.getColumn()].setBackground(View.FILLED_COLOR);		
+//		}
+		
+		for (int i = 0; i < boardSize.getRows(); i++) {
+			for (int j = 0; j < boardSize.getColumns(); j++) {
+				setButtonBackground(new Position(i, j));
+			}
+			
+		}
+	}
+	
+//	private void resetFields(){
+//		
+//		for(JButton[] buttonRows: buttons){
+//			for(JButton button: buttonRows){
+//				button.setBackground(View.EMPTY_COLOR);
+//			}
+//		}
+//	}
+	
 	public void setButtonBackground(Position position){
 		JButton button = buttons[position.getRow()][position.getColumn()];
 		if(isCellAlive(position)){
@@ -50,9 +79,9 @@ public class BoardPanel extends JPanel {
 		}
 	}
 	
-	public void changeColor(Position pos){
-		buttons[pos.getRow()][pos.getColumn()].setBackground(View.FILLED_COLOR);
-	}
+//	public void changeColor(Position pos){
+//		buttons[pos.getRow()][pos.getColumn()].setBackground(View.FILLED_COLOR);
+//	}
 	
 	private boolean isCellAlive(Position position){
 		return board.getCell(position);
