@@ -28,7 +28,7 @@ public class BoardPanel extends JPanel {
 		addButtons(boardController);
 	}
 
-	public void nextCycle() {
+	public void setBackgrounds() {
 		for (int i = 0; i < boardSize.getRows(); i++) {
 			for (int j = 0; j < boardSize.getColumns(); j++) {
 				setButtonBackground(new Position(i, j));

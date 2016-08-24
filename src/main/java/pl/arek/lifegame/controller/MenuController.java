@@ -27,6 +27,10 @@ public class MenuController {
 	public ActionListener newPauseListener() {
 		return new PauseListener();
 	}
+	
+	public ActionListener newPopulateListener() {
+		return new PopulateListener();
+	}
 
 	public ActionListener newExitListener() {
 		return new ExitListener();
@@ -49,6 +53,13 @@ public class MenuController {
 			buttonPanel.enableOrDisableButtons();
 		}
 	}
+	
+	private class PopulateListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			board.populate();
+			boardPanel.setBackgrounds();
+		}
+	}
 
 	private class ExitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -62,7 +73,7 @@ public class MenuController {
 				for (int i = 0; i < 1000; i++) {
 					if (!suspend) {
 						board.nextCycle();
-						boardPanel.nextCycle();
+						boardPanel.setBackgrounds();
 						Thread.sleep(1000);
 					}
 				}

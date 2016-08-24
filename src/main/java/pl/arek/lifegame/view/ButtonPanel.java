@@ -13,6 +13,7 @@ public class ButtonPanel extends JPanel {
 	private final JButton startButton = new JButton("Start");
 	private final JButton endButton = new JButton("Close");
 	private final JButton pauseButton = new JButton("Pause");
+	private final JButton populateButton = new JButton("Populate");
 
 	@Autowired
 	ButtonPanel(MenuController menuController) {
@@ -20,10 +21,12 @@ public class ButtonPanel extends JPanel {
 
 		startButton.addActionListener(menuController.newStartListener());
 		pauseButton.addActionListener(menuController.newPauseListener());
+		populateButton.addActionListener(menuController.newPopulateListener());
 		endButton.addActionListener(menuController.newExitListener());
 
 		this.add(startButton);
 		this.add(pauseButton);
+		this.add(populateButton);
 		this.add(endButton);
 	}
 

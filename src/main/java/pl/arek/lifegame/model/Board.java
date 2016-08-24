@@ -40,9 +40,13 @@ public class Board {
 			cell.setAlive(true);
 		}
 	}
-
-	public boolean getCell(Position position) {
-		return cells[position.getRow()][position.getColumn()].isAlive();
+	
+	public void populate(){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				cells[i][j] = new Cell(true);
+			}
+		}
 	}
 
 	public void nextCycle() {
@@ -85,5 +89,9 @@ public class Board {
 			}
 		}
 		return newBoard;
+	}
+	
+	public boolean getCell(Position position) {
+		return cells[position.getRow()][position.getColumn()].isAlive();
 	}
 }
