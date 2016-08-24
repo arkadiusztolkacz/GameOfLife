@@ -24,17 +24,17 @@ public class ButtonPanel extends JPanel {
 	@Autowired
 	ButtonPanel(MenuController menuController, BoardController boardController) {
 		pauseButton.setEnabled(false);
-		
+
 		rowCheckBox.addActionListener(boardController.newSelectRowsListener());
 		columnCheckBox.addActionListener(boardController.newSelectColumnsListener());
-		
+
 		startButton.addActionListener(menuController.newStartListener());
 		pauseButton.addActionListener(menuController.newPauseListener());
 		clearButton.addActionListener(menuController.newClearListener());
 		populateButton.addActionListener(menuController.newPopulateListener());
 		randomButton.addActionListener(menuController.newRandomListener());
 		endButton.addActionListener(menuController.newExitListener());
-		
+
 		this.add(rowCheckBox);
 		this.add(columnCheckBox);
 		this.add(startButton);
@@ -57,12 +57,12 @@ public class ButtonPanel extends JPanel {
 		startButton.setEnabled(!startButton.isEnabled());
 		pauseButton.setEnabled(!pauseButton.isEnabled());
 	}
-	
-	public boolean isRowSelected(){
+
+	public boolean isRowSelected() {
 		return rowCheckBox.isSelected();
 	}
-	
-	public boolean isColumnSelected(){
+
+	public boolean isColumnSelected() {
 		return columnCheckBox.isSelected();
 	}
 }

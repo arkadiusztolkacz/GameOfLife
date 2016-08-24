@@ -67,8 +67,7 @@ public class MenuController {
 		public void actionPerformed(ActionEvent e) {
 			board.initializeCells();
 			boardPanel.setBackgrounds();
-		}
-		
+		}		
 	}
 	
 	private class PopulateListener implements ActionListener {
