@@ -16,24 +16,19 @@ public class BoardController {
 	private Board board;
 	@Autowired
 	private BoardPanel boardPanel;
-	
-	public ActionListener newMakeLifeListener(Position position){
+
+	public ActionListener newMakeLifeListener(Position position) {
 		return new MakeLifeListener(position);
 	}
 
 	private class MakeLifeListener implements ActionListener {
-		
 		Position position;
-		
-		private MakeLifeListener(final Position position){
+		private MakeLifeListener(final Position position) {
 			this.position = position;
 		}
-		
-		@Override
+
 		public void actionPerformed(ActionEvent arg0) {
-			//System.out.println("row: " + position.getRow() + " column: " + position.getColumn());
 			board.setCell(position);
-			//boardPanel.changeColor(position);
 			boardPanel.setButtonBackground(position);
 		}
 	}

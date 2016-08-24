@@ -24,5 +24,4 @@ public class Position {
 	public void setColumn(int column) {
 		this.column = column;
 	}
-
 }

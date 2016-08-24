@@ -18,65 +18,57 @@ public class MenuController {
 	private ButtonPanel buttonPanel;
 	@Autowired
 	private BoardPanel boardPanel;
-	
 	private boolean suspend = false;
-	
-	public ActionListener newStartListener(){
+
+	public ActionListener newStartListener() {
 		return new StartListener();
 	}
-	
-	public ActionListener newPauseListener(){
+
+	public ActionListener newPauseListener() {
 		return new PauseListener();
 	}
-	
-	public ActionListener newExitListener(){
+
+	public ActionListener newExitListener() {
 		return new ExitListener();
 	}
-	
+
 	private class StartListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-//            System.out.println("Start working");
-//            buttonPanel.enableOrDisablePause(true);
-//            buttonPanel.enableOrDisableStart(false);
-        	suspend = false;
-        	buttonPanel.enableOrDisableButtons();
-//        	board.nextCycle();
-//        	boardPanel.nextCycle();
-        	
-        	 LifeRunnable life = new LifeRunnable();
-             Thread thread = new Thread(life);
-             thread.start();
-        }
-    }
-	
+		public void actionPerformed(ActionEvent e) {
+			suspend = false;
+			buttonPanel.enableOrDisableButtons();
+
+			LifeRunnable life = new LifeRunnable();
+			Thread thread = new Thread(life);
+			thread.start();
+		}
+	}
+
 	private class PauseListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-//        	buttonPanel.enableOrDisablePause(false);
-//            buttonPanel.enableOrDisableStart(true);
-        	 suspend = true;
-        	buttonPanel.enableOrDisableButtons();
-        }
-    }
-	
+		public void actionPerformed(ActionEvent e) {
+			suspend = true;
+			buttonPanel.enableOrDisableButtons();
+		}
+	}
+
 	private class ExitListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
-    }
-	
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+
 	private class LifeRunnable implements Runnable {
-        public void run() {
-            try {
-                for (int i = 0; i < 1000; i++) {
-                    if (!suspend) {
-                    	board.nextCycle();
-                    	boardPanel.nextCycle();
-                        Thread.sleep(1000);
-                    }
-                }
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
+		public void run() {
+			try {
+				for (int i = 0; i < 1000; i++) {
+					if (!suspend) {
+						board.nextCycle();
+						boardPanel.nextCycle();
+						Thread.sleep(1000);
+					}
+				}
+			} catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+		}
+	}
 }

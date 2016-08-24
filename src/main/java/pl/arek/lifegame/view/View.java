@@ -11,15 +11,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class View extends JFrame {
-	
-//	@Autowired
-//	private BoardPanel boardPanel;
-//	@Autowired
-//	private ButtonPanel buttonPanel;
-	
+
 	 final static Color EMPTY_COLOR = Color.CYAN;
 	 final static Color FILLED_COLOR = Color.RED;
 	
+	 @Autowired
 	public View(BoardPanel boardPanel, ButtonPanel buttonPanel){
 		super("Game of Life");
 		this.setLayout(new BorderLayout());
