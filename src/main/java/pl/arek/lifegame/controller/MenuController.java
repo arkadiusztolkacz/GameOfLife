@@ -28,6 +28,10 @@ public class MenuController {
 		return new PauseListener();
 	}
 	
+	public ActionListener newClearListener() {
+		return new ClearListener();
+	}
+	
 	public ActionListener newPopulateListener() {
 		return new PopulateListener();
 	}
@@ -56,6 +60,15 @@ public class MenuController {
 			suspend = true;
 			buttonPanel.enableOrDisableButtons();
 		}
+	}
+	
+	private class ClearListener implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			board.initializeCells();
+			boardPanel.setBackgrounds();
+		}
+		
 	}
 	
 	private class PopulateListener implements ActionListener {

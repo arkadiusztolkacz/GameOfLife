@@ -1,6 +1,5 @@
 package pl.arek.lifegame.model;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
@@ -24,7 +23,7 @@ public class Board {
 	}
 
 	@PostConstruct
-	private void initializeCells() {
+	public void initializeCells() {
 		cells = new Cell[rows][columns];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -40,6 +39,20 @@ public class Board {
 		} else {
 			cell.setAlive(true);
 		}
+	}
+	
+	public void setCellsInRow(Position position){
+		for(int i = 0; i < columns; i++){
+			setCell(new Position(position.getRow(), i));
+		}
+		setCell(position);
+	}
+	
+	public void setCellsInColumn(Position position){
+		for(int i = 0; i < rows; i++){
+			setCell(new Position(i, position.getColumn()));
+		}
+		setCell(position);
 	}
 	
 	public void populate(){
