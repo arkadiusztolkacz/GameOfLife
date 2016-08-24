@@ -16,7 +16,7 @@ public class ButtonPanel extends JPanel{
 	    
 	    @Autowired
 	    ButtonPanel(MenuController menuController) {
-	        enableOrDisablePause(false);
+	        pauseButton.setEnabled(false);
 	    	
 	    	startButton.addActionListener(menuController.newStartListener());
 	    	pauseButton.addActionListener(menuController.newPauseListener());
@@ -34,6 +34,12 @@ public class ButtonPanel extends JPanel{
 	    public void enableOrDisablePause(boolean enable)
 	    {
 	    	 pauseButton.setEnabled(enable);
+	    }
+	    
+	    public void enableOrDisableButtons()
+	    {
+	    	startButton.setEnabled(!startButton.isEnabled());
+	    	pauseButton.setEnabled(!pauseButton.isEnabled());
 	    }
 	    
 }

@@ -33,7 +33,8 @@ public class BoardController {
 		public void actionPerformed(ActionEvent arg0) {
 			//System.out.println("row: " + position.getRow() + " column: " + position.getColumn());
 			board.setCell(position);
-			boardPanel.changeColor(position);
+			//boardPanel.changeColor(position);
+			boardPanel.setButtonBackground(position);
 			
 		}
 	}

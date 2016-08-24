@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pl.arek.lifegame.controller.BoardController;
+import pl.arek.lifegame.model.Board;
 import pl.arek.lifegame.model.util.BoardSize;
 import pl.arek.lifegame.model.util.Position;
 
 @Component
 public class BoardPanel extends JPanel {
-
+	
+	@Autowired
+	private Board board;
+	
 	private final JButton[][] buttons;
 	
 	@Autowired
@@ -36,7 +40,21 @@ public class BoardPanel extends JPanel {
 			}
 		}
 	}
+	
+	public void setButtonBackground(Position position){
+		JButton button = buttons[position.getRow()][position.getColumn()];
+		if(isCellAlive(position)){
+			button.setBackground(View.FILLED_COLOR);
+		}else{
+			button.setBackground(View.EMPTY_COLOR);
+		}
+	}
+	
 	public void changeColor(Position pos){
 		buttons[pos.getRow()][pos.getColumn()].setBackground(View.FILLED_COLOR);
+	}
+	
+	private boolean isCellAlive(Position position){
+		return board.getCell(position);
 	}
 }

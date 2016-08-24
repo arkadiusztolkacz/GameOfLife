@@ -10,9 +10,9 @@ public class GameOfLife {
     public static void main(String[] args) {
     	ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
     	
-    	Board board = context.getBean(Board.class);
-    	String state = board.getState();
-    	System.out.println(state);
+//    	Board board = context.getBean(Board.class);
+//    	String state = board.getState();
+//    	System.out.println(state);
     	
 		View view = context.getBean(View.class);
 		view.setVisible(true);

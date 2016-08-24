@@ -28,16 +28,18 @@ public class MenuController {
 	
 	private class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Start working");
-            buttonPanel.enableOrDisablePause(true);
-            buttonPanel.enableOrDisableStart(false);
+//            System.out.println("Start working");
+//            buttonPanel.enableOrDisablePause(true);
+//            buttonPanel.enableOrDisableStart(false);
+        	buttonPanel.enableOrDisableButtons();
         }
     }
 	
 	private class PauseListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        	buttonPanel.enableOrDisablePause(false);
-            buttonPanel.enableOrDisableStart(true);
+//        	buttonPanel.enableOrDisablePause(false);
+//            buttonPanel.enableOrDisableStart(true);
+        	buttonPanel.enableOrDisableButtons();
         }
     }
 	

@@ -17,8 +17,8 @@ public class View extends JFrame {
 //	@Autowired
 //	private ButtonPanel buttonPanel;
 	
-	public final static Color EMPTY_COLOR = Color.CYAN;
-	public final static Color FILLED_COLOR = Color.RED;
+	 final static Color EMPTY_COLOR = Color.CYAN;
+	 final static Color FILLED_COLOR = Color.RED;
 	
 	public View(BoardPanel boardPanel, ButtonPanel buttonPanel){
 		super("Game of Life");
