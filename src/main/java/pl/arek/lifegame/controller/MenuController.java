@@ -31,6 +31,10 @@ public class MenuController {
 	public ActionListener newPopulateListener() {
 		return new PopulateListener();
 	}
+	
+	public ActionListener newRandomListener() {
+		return new RandomListener();
+	}
 
 	public ActionListener newExitListener() {
 		return new ExitListener();
@@ -57,6 +61,13 @@ public class MenuController {
 	private class PopulateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			board.populate();
+			boardPanel.setBackgrounds();
+		}
+	}
+	
+	private class RandomListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			board.randomPopulate();
 			boardPanel.setBackgrounds();
 		}
 	}

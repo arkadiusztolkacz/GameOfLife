@@ -1,6 +1,7 @@
 package pl.arek.lifegame.model;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
@@ -45,6 +46,16 @@ public class Board {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				cells[i][j] = new Cell(true);
+			}
+		}
+	}
+	
+	public void randomPopulate(){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				Random lifeGenerator = new Random();
+				boolean randomLife = lifeGenerator.nextBoolean();
+				cells[i][j] = new Cell(randomLife);
 			}
 		}
 	}
