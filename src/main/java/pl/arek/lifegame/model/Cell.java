@@ -19,26 +19,22 @@ public class Cell {
 		this.alive = alive;
 	}
 
-	boolean changeState(int neighboursCount) {
+	void changeState(int neighboursCount) {
 		if (isAlive()) {
-			return changeAliveState(neighboursCount);
+			changeAliveState(neighboursCount);
 		}
-		return changeDeadState(neighboursCount);
+		changeDeadState(neighboursCount);
 	}
 
-	private boolean changeAliveState(int neighboursCount) {
+	private void changeAliveState(int neighboursCount) {
 		if ((neighboursCount < 2) || (neighboursCount > 3)) {
 			alive = false;
-			return true;
 		}
-		return false;
 	}
 
-	private boolean changeDeadState(int neighboursCount) {
+	private void changeDeadState(int neighboursCount) {
 		if (neighboursCount == 3) {
 			alive = true;
-			return true;
 		}
-		return false;
 	}
 }
